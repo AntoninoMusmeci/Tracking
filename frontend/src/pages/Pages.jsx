@@ -11,7 +11,7 @@ function Pages() {
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/diary/:date" element={<Diary />} />
+        <Route path="/diary" element={<Diary />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/recipes" element={<Recipes />} />
       </Routes>

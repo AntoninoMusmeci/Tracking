@@ -1,9 +1,15 @@
 import Pages from "./pages/Pages";
+import { StateContext } from "./utils/context";
+import { BrowserRouter } from "react-router-dom";
 function App() {
   return (
-    <div className="App">
-      <Pages />
-    </div>
+    <BrowserRouter>
+      <StateContext>
+        <div className="App">
+          <Pages />
+        </div>
+      </StateContext>
+    </BrowserRouter>
   );
 }
 
