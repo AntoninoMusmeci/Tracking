@@ -16,7 +16,6 @@ function NavBar() {
     <NavigationBar>
       <LinkStyled to={`/dashboard`}> Dashboard </LinkStyled>
       <LinkStyled to={`/diary?date=${date}`}> Diary </LinkStyled>
-
       <LinkStyled to={`/recipes`}> Recipes </LinkStyled>
     </NavigationBar>
   );

@@ -3,16 +3,19 @@ import styled from "styled-components";
 import TrackingForm from "./TrackingForm";
 import { v4 as uuid } from "uuid";
 import { useStateContext } from "../utils/context";
-function MealTable({ name }) {
-  const [meals, setMeals] = useState([]);
+
+function MealTable({ name, meals }) {
+
   const [show, setShow] = useState(false);
-  const { setTotalCalories } = useStateContext();
+  const { setTotalCalories, addMeal } = useStateContext();
   
   const handleSubmit = (e, info) => {
     e.preventDefault();
     console.log(info);
     setTotalCalories(state => state + parseInt(info.calories))
-    setMeals([...meals, { ...info, id: uuid() }]);
+
+
+    addMeal(name,{ ...info, id: uuid() })
     setShow(false);
   };
 
@@ -100,3 +103,11 @@ const Meal = styled.li`
 `;
 
 export default MealTable;
+
+
+
+
+
+
+
+
