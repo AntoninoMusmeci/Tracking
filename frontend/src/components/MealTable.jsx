@@ -11,12 +11,11 @@ function MealTable({ name, meals }) {
   
   const handleSubmit = (e, info) => {
     e.preventDefault();
-    console.log(info);
     setTotalCalories(state => state + parseInt(info.calories))
 
 
     addMeal(name,{ ...info, id: uuid() })
-    setShow(false);
+
   };
 
   return (

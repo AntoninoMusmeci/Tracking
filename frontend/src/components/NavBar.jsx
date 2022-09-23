@@ -11,7 +11,7 @@ function NavBar() {
   }
   let date = getFormattedDate(new Date());
 
-  console.log(date);
+
   return (
     <NavigationBar>
       <LinkStyled to={`/dashboard`}> Dashboard </LinkStyled>

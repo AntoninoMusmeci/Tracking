@@ -3,7 +3,7 @@ import { useStateContext } from "../utils/context";
 import styled from "styled-components";
 function RecapTable() {
   const { totalCalories } = useStateContext();
-  console.log(totalCalories);
+
   return (
     <Wrapper>
       <div>
@@ -33,7 +33,7 @@ function RecapTable() {
   );
 }
 
-const Wrapper = styled.form`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -41,7 +41,7 @@ const Wrapper = styled.form`
   
 `;
 
-const CalorieWrapper = styled.form`
+const CalorieWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 2rem;

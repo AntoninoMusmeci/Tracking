@@ -1,56 +1,78 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-function TrackingForm({handleSubmit, show, setShow  }) {
-  const [mealInfo, setMealInfo] = useState({name: "Manual Add"});
+import SearchModal from "./SearchModal";
+
+function TrackingForm({ handleSubmit, show, setShow }) {
+  const [mealInfo, setMealInfo] = useState({ name: "Manual Add" });
+  const [showForm, setShowForm] = useState(false);
+  const [showDetails, setShowDetails] = useState(false)
   const handleInput = (e) => {
-    console.log(e.target.value, e.target.name);
     setMealInfo({ ...mealInfo, [e.target.name]: e.target.value });
   };
-
+  
   if (!show) return null;
 
   return (
-    <FormWrapper onSubmit={(e) => {console.log("form", mealInfo); handleSubmit(e,mealInfo)}}>
+    <FormWrapper onClick={ () => {console.log("click"); setShowForm(false)}}>
       <Content>
-        Calories{" "}
-        <input
-          type="text"
-          id="calories"
-          name="calories"
-          onChange={handleInput}
-          placeholder="Enter calorie amount"
-        />
-        Fat{" "}
-        <input
-          type="text"
-          id="fat"
-          name="fat"
-          onChange={handleInput}
-          placeholder="Enter fat amount"
-        />
-        Protein{" "}
-        <input
-          type="text"
-          id="protein"
-          name="protein"
-          onChange={handleInput}
-          placeholder="Enter protein amount"
-        />
-        Carbohydrates{" "}
-        <input
-          type="text"
-          id="carbohydrates"
-          name="carbohydrates"
-          onChange={handleInput}
-          placeholder="Enter carbohydrates amount"
-        />
-        <button type="submit"> ADD FOOD </button>
+        {!showForm ? (
+          <div>
+            <ButtonS
+              onClick={() => {
+                setShowForm(true);
+              }}
+            >
+              Manual Add
+            </ButtonS>
+            <SearchModal addFood={handleSubmit} />
+          </div>
+        ) : (
+          <FormS
+            onSubmit={(e) => {
+              handleSubmit(e, mealInfo);
+            }}
+          >
+            Calories{" "}
+            <input
+              type="text"
+              id="calories"
+              name="calories"
+              onChange={handleInput}
+              placeholder="Enter calorie amount"
+            />
+            Fat{" "}
+            <input
+              type="text"
+              id="fat"
+              name="fat"
+              onChange={handleInput}
+              placeholder="Enter fat amount"
+            />
+            Protein{" "}
+            <input
+              type="text"
+              id="protein"
+              name="protein"
+              onChange={handleInput}
+              placeholder="Enter protein amount"
+            />
+            Carbohydrates{" "}
+            <input
+              type="text"
+              id="carbohydrates"
+              name="carbohydrates"
+              onChange={handleInput}
+              placeholder="Enter carbohydrates amount"
+            />
+            <button type="submit"> ADD FOOD </button>
+          </FormS>
+        )}
       </Content>
     </FormWrapper>
   );
 }
 
-const FormWrapper = styled.form`
+const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -61,15 +83,29 @@ const FormWrapper = styled.form`
   background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
-  
 `;
 const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 500px;
+  width:30rem;
   background-color: white;
   padding: 10px;
-  button{
+  overflow-y: scroll;
+  
+
+`;
+const ButtonS = styled.button`
+  width: 5rem;
+  height:  5rem;
+  margin-left: 2rem;
+  margin-bottom: 0.5rem;
+
+`;
+
+
+const FormS = styled.form`
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  button {
     padding: 5px;
     background: var(--secondary);
     margin: 5px;
@@ -77,9 +113,4 @@ const Content = styled.div`
     color: white;
   }
 `;
-
-
-
-
-
 export default TrackingForm;

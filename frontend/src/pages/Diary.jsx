@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import MealTable from "../components/MealTable";
 import styled from "styled-components";
 import RecapTable from "../components/RecapTable";
 import { useStateContext } from "../utils/context";
+import { getFoods } from "../utils/apiCalls";
 function Diary() {
   let params = useParams();
 
+
+
+
   const { meals } = useStateContext();
-  console.log("meals", meals);
+
   return (
     <>
       <Header>Diary Page</Header>

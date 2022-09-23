@@ -11,11 +11,13 @@ export const StateContext = ({ children }) => {
   });
 
   const addMeal = (key, meal) => {
+
     key = key.toLowerCase()
     let mealsCopy = { ...meals };
-    console.log("copy", mealsCopy[key])
     mealsCopy[key] = [...(mealsCopy[key]), meal];
+    
     setMeals(mealsCopy);
+    
   };
 
   return (
