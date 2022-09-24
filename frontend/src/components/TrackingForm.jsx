@@ -1,31 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SearchModal from "./SearchModal";
-
+import FoodDetail from "./FoodDetail";
 function TrackingForm({ handleSubmit, show, setShow }) {
   const [mealInfo, setMealInfo] = useState({ name: "Manual Add" });
   const [showForm, setShowForm] = useState(false);
-  const [showDetails, setShowDetails] = useState(false)
+  const [showDetails, setShowDetails] = useState(false);
+  const [food, setFood] = useState({});
+
+
   const handleInput = (e) => {
     setMealInfo({ ...mealInfo, [e.target.name]: e.target.value });
   };
-  
+
   if (!show) return null;
 
   return (
-    <FormWrapper onClick={ () => {console.log("click"); setShowForm(false)}}>
+    <FormWrapper>
       <Content>
         {!showForm ? (
-          <div>
-            <ButtonS
-              onClick={() => {
-                setShowForm(true);
-              }}
-            >
-              Manual Add
-            </ButtonS>
-            <SearchModal addFood={handleSubmit} />
-          </div>
+          !showDetails ? (
+            <div>
+              <ButtonS
+                onClick={() => {
+                  setShowForm(true);
+                }}
+              >
+                Manual Add
+              </ButtonS>
+              <SearchModal
+                setShowDetails={setShowDetails}
+                addFood={handleSubmit}
+                setFood={setFood}
+              />
+            </div>
+          ) : (
+      <FoodDetail setShowDetails= {setShowDetails} food = {food} handleSubmit= {handleSubmit}></FoodDetail>
+          )
         ) : (
           <FormS
             onSubmit={(e) => {
@@ -72,6 +83,8 @@ function TrackingForm({ handleSubmit, show, setShow }) {
   );
 }
 
+
+
 const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -85,21 +98,18 @@ const FormWrapper = styled.div`
   align-items: center;
 `;
 const Content = styled.div`
-  width:30rem;
+  width: 30rem;
   background-color: white;
   padding: 10px;
   overflow-y: scroll;
-  
-
 `;
 const ButtonS = styled.button`
   width: 5rem;
-  height:  5rem;
+  height: 5rem;
   margin-left: 2rem;
   margin-bottom: 0.5rem;
-
+  cursor: pointer;
 `;
-
 
 const FormS = styled.form`
   display: flex;
@@ -111,6 +121,7 @@ const FormS = styled.form`
     margin: 5px;
     border-radius: 0.5rem;
     color: white;
+    cursor: pointer;
   }
 `;
 export default TrackingForm;

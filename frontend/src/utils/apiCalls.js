@@ -10,11 +10,16 @@ export const getFoods = async (setFoodData, ing) => {
   );
   let data = await api.json();
   data = data.hints;
+  console.log(data)
   const result = data.map((food) => {
     return {
       name: food.food.label,
       nutrients: {
         calories: food.food.nutrients.ENERC_KCAL,
+        carbs: food.food.nutrients.CHOCDF,
+        protein: food.food.nutrients.PROCNT,
+        fat: food.food.nutrients.FAT
+        ,
       },
       id: food.food.foodId,
     };

@@ -17,10 +17,6 @@ function Diary() {
     <>
       <Header>Diary Page</Header>
       <RecapTable />
-      {/* <MealTable name = {"Breakfast"}/>
-      <MealTable name = {"Lunch"}/>
-      <MealTable name = {"Dinner"}/>
-      <MealTable name = {"Snacks"}/> */}
       {Object.entries(meals).map(([key, value]) => {
         return <MealTable name={key} meals = {value}/>;
       })}

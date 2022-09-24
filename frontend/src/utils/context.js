@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const AppContext = createContext();
 export const StateContext = ({ children }) => {
+  const [foods, setFoods] = useState([]);
   const [totalCalories, setTotalCalories] = useState(0);
   const [meals, setMeals] = useState({
     breakfast: [],
@@ -15,13 +16,13 @@ export const StateContext = ({ children }) => {
     key = key.toLowerCase()
     let mealsCopy = { ...meals };
     mealsCopy[key] = [...(mealsCopy[key]), meal];
-    
+
     setMeals(mealsCopy);
     
   };
 
   return (
-    <AppContext.Provider value={{ totalCalories, setTotalCalories, meals, addMeal}}>
+    <AppContext.Provider value={{ totalCalories, setTotalCalories, meals, addMeal, foods, setFoods}}>
       {children}
     </AppContext.Provider>
   );

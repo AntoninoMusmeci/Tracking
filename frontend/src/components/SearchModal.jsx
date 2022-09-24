@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { getFoods } from "../utils/apiCalls";
 import styled from "styled-components";
-import { BsPlusCircle, BsSearch} from "react-icons/bs";
+import { BsPlusCircle, BsSearch } from "react-icons/bs";
 import { reduceString } from "../utils/functions";
 import { toast } from "react-hot-toast";
+import { useStateContext } from "../utils/context";
 
-function SearchModal({addFood}) {
- 
+function SearchModal({ addFood, setShowDetails, setFood }) {
+  const { foods, setFoods } = useStateContext();
   const [ing, setIng] = useState("");
-  const [foods, setFoods] = useState([]);
+
   useEffect(() => {
     console.log("data", foods);
   }, [foods]);
@@ -20,35 +21,54 @@ function SearchModal({addFood}) {
   const notify = () => {
     toast.success(`Food added`);
   };
+
+  const createFoodObj = (foods) => {
+    return {
+      name: foods.name,
+      id: foods.id,
+      fat: foods.nutrients.fat,
+      protein: foods.nutrients.protein,
+      carbs: foods.nutrients.carbs,
+      calories: Math.floor(foods.nutrients.calories),
+    }
+  }
   const handleFood = (e, foods) => {
-
-    const foodObject = {name: foods.name, id: foods.id, calories: Math.floor(foods.nutrients.calories)}
-    addFood(e,foodObject)
-
+    
+    addFood(e, createFoodObj(foods));
   };
 
   return (
     <>
       <FormS onSubmit={handleSubmit}>
-        <BsSearch/>
-        <input 
+        <BsSearch />
+        <input
           onChange={(e) => {
             setIng(e.target.value);
           }}
         />
-      
       </FormS>
       <FoodList>
         {foods.map((food) => {
           return (
-            <Food key={food.id} >
+            <Food
+              key={food.id}
+              onClick={() => {
+                setShowDetails(true);
+                setFood(
+                  createFoodObj(food)
+                );
+              }}
+            >
               <div>
                 <p> {reduceString(food.name)}</p>
                 <span> {Math.floor(food.nutrients.calories)} cal</span>
               </div>
-              <BsPlusCircle onClick={(e) =>{notify(); handleFood(e,food)} }/>
-       
-           
+              <BsPlusCircle
+                onClick={(e) => {
+                  notify();
+                  handleFood(e, food);
+                }}
+              />
             </Food>
           );
         })}
@@ -70,24 +90,20 @@ const FoodList = styled.div`
 const FormS = styled.form`
   position: relative;
   text-align: center;
-  
-  input{
+
+  input {
     height: 2rem;
     width: 15rem;
     padding-left: 2rem;
     border-radius: 100px 100px 100px 100px;
     outline: none;
-    width:50%
-    
+    width: 50%;
   }
-  svg{
+  svg {
     position: absolute;
     left: 24%;
-    top: 30%
-  
-
+    top: 30%;
   }
-
 `;
 const Food = styled.div`
   display: flex;
@@ -117,7 +133,6 @@ const Food = styled.div`
     color: var(--secondary);
     cursor: pointer;
   }
-  
 `;
 
 export default SearchModal;
