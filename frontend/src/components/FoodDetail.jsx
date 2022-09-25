@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import styled from "styled-components";
 import { DoughnutChart } from "./Chart";
-function FoodDetail({ setShowDetails, food, handleSubmit }) {
+function FoodDetail({ food, handleSubmit }) {
   const computePercentage = (nutrients, value) => {
     const sum = nutrients.reduce((partialSum, a) => partialSum + a, 0);
     return Math.floor((value / sum) * 100);
@@ -17,13 +17,7 @@ function FoodDetail({ setShowDetails, food, handleSubmit }) {
   console.log(nutrients);
   return (
     <Detail>
-      <button
-        onClick={() => {
-          setShowDetails(false);
-        }}
-      >
-        Add Food
-      </button>
+    
       <ul>
         <li>
           <p>Food</p>

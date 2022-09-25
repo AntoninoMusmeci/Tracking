@@ -5,17 +5,14 @@ import { v4 as uuid } from "uuid";
 import { useStateContext } from "../utils/context";
 
 function MealTable({ name, meals }) {
-
   const [show, setShow] = useState(false);
-  const { setTotalCalories, addMeal } = useStateContext();
-  
+  const { setTotalCalories, addMeal, removeMeal } = useStateContext();
+
   const handleSubmit = (e, info) => {
     e.preventDefault();
-    setTotalCalories(state => state + parseInt(info.calories))
+    setTotalCalories((state) => state + parseInt(info.calories));
 
-
-    addMeal(name,{ ...info, id: uuid() })
-
+    addMeal(name, { ...info, id: uuid() });
   };
 
   return (
@@ -25,8 +22,9 @@ function MealTable({ name, meals }) {
         <MealWrapper>
           {meals.map((meal) => (
             <Meal key={meal.id}>
-              <h3> {meal?.name}</h3>
+              <h3 onClick={() => setShow(true)}> {meal?.name}</h3>
               <h4> {meal.calories}</h4>
+              <button onClick={() => removeMeal(name, meal)}> remove </button>
             </Meal>
           ))}
         </MealWrapper>
@@ -99,14 +97,9 @@ const Meal = styled.li`
   justify-content: space-between;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+  h3 {
+    cursor: pointer;
+  }
 `;
 
 export default MealTable;
-
-
-
-
-
-
-
-

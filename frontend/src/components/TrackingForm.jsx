@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SearchModal from "./SearchModal";
 import FoodDetail from "./FoodDetail";
+import {AiOutlineArrowLeft} from "react-icons/ai"
 function TrackingForm({ handleSubmit, show, setShow }) {
   const [mealInfo, setMealInfo] = useState({ name: "Manual Add" });
   const [showForm, setShowForm] = useState(false);
@@ -16,8 +17,8 @@ function TrackingForm({ handleSubmit, show, setShow }) {
   if (!show) return null;
 
   return (
-    <FormWrapper>
-      <Content>
+    <FormWrapper onClick = {() => {setShow(false); setShowForm(false)}}>
+      <Content onClick = {(e) => {e.stopPropagation()}}>
         {!showForm ? (
           !showDetails ? (
             <div>
@@ -35,14 +36,19 @@ function TrackingForm({ handleSubmit, show, setShow }) {
               />
             </div>
           ) : (
-      <FoodDetail setShowDetails= {setShowDetails} food = {food} handleSubmit= {handleSubmit}></FoodDetail>
+            <div>
+              <AiOutlineArrowLeft onClick={() => setShowDetails(false)}/>
+              <FoodDetail food = {food} handleSubmit= {handleSubmit}></FoodDetail>
+            </div>
+
           )
         ) : (
           <FormS
             onSubmit={(e) => {
               handleSubmit(e, mealInfo);
             }}
-          >
+          > 
+          <AiOutlineArrowLeft onClick={() => setShowForm(false)}/>
             Calories{" "}
             <input
               type="text"
@@ -122,6 +128,10 @@ const FormS = styled.form`
     border-radius: 0.5rem;
     color: white;
     cursor: pointer;
+  }
+  svg{
+    margin: 3px;
+    cursor:pointer;
   }
 `;
 export default TrackingForm;

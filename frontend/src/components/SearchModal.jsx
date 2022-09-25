@@ -65,6 +65,7 @@ function SearchModal({ addFood, setShowDetails, setFood }) {
               </div>
               <BsPlusCircle
                 onClick={(e) => {
+                  e.stopPropagation()
                   notify();
                   handleFood(e, food);
                 }}
