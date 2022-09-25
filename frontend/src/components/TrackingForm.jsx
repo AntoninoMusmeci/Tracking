@@ -37,7 +37,7 @@ function TrackingForm({ handleSubmit, show, setShow }) {
             </div>
           ) : (
             <div>
-              <AiOutlineArrowLeft onClick={() => setShowDetails(false)}/>
+              <AiOutlineArrowLeft style={{cursor:"pointer"}} onClick={() => setShowDetails(false)}/>
               <FoodDetail food = {food} handleSubmit= {handleSubmit}></FoodDetail>
             </div>
 
