@@ -1,8 +1,12 @@
 import React from 'react'
-
+import Modal from "../components/Modal"
 function Recipes() {
   return (
-    <div>recipes</div>
+    <div>
+      <Modal>
+        <h1> Open! </h1>
+      </Modal>
+    </div>
   )
 }
 

@@ -30,10 +30,9 @@ function SearchModal({ addFood, setShowDetails, setFood }) {
       protein: foods.nutrients.protein,
       carbs: foods.nutrients.carbs,
       calories: Math.floor(foods.nutrients.calories),
-    }
-  }
+    };
+  };
   const handleFood = (e, foods) => {
-    
     addFood(e, createFoodObj(foods));
   };
 
@@ -54,9 +53,7 @@ function SearchModal({ addFood, setShowDetails, setFood }) {
               key={food.id}
               onClick={() => {
                 setShowDetails(true);
-                setFood(
-                  createFoodObj(food)
-                );
+                setFood(createFoodObj(food));
               }}
             >
               <div>
@@ -65,7 +62,7 @@ function SearchModal({ addFood, setShowDetails, setFood }) {
               </div>
               <BsPlusCircle
                 onClick={(e) => {
-                  e.stopPropagation()
+                  e.stopPropagation();
                   notify();
                   handleFood(e, food);
                 }}

@@ -38,7 +38,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   background-color: white;
   box-shadow: 0px 13px 15px -3px grey;
-  
 `;
 
 const CalorieWrapper = styled.div`

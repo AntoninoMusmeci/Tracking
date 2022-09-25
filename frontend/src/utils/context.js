@@ -22,7 +22,7 @@ export const StateContext = ({ children }) => {
   const removeMeal = (key, meal) => {
     key = key.toLowerCase();
     let mealsCopy = { ...meals };
-    console.log("key", key, "id", meal)
+    console.log("key", key, "id", meal);
     mealsCopy[key] = mealsCopy[key].filter((m) => m.id !== meal.id);
     console.log(mealsCopy);
     setMeals(mealsCopy);

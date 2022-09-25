@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import SearchModal from "./SearchModal";
 import FoodDetail from "./FoodDetail";
-import {AiOutlineArrowLeft} from "react-icons/ai"
+import { AiOutlineArrowLeft } from "react-icons/ai";
 function TrackingForm({ handleSubmit, show, setShow }) {
   const [mealInfo, setMealInfo] = useState({ name: "Manual Add" });
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [food, setFood] = useState({});
-
 
   const handleInput = (e) => {
     setMealInfo({ ...mealInfo, [e.target.name]: e.target.value });
@@ -17,8 +16,17 @@ function TrackingForm({ handleSubmit, show, setShow }) {
   if (!show) return null;
 
   return (
-    <FormWrapper onClick = {() => {setShow(false); setShowForm(false)}}>
-      <Content onClick = {(e) => {e.stopPropagation()}}>
+    <FormWrapper
+      onClick={() => {
+        setShow(false);
+        setShowForm(false);
+      }}
+    >
+      <Content
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         {!showForm ? (
           !showDetails ? (
             <div>
@@ -37,18 +45,20 @@ function TrackingForm({ handleSubmit, show, setShow }) {
             </div>
           ) : (
             <div>
-              <AiOutlineArrowLeft style={{cursor:"pointer"}} onClick={() => setShowDetails(false)}/>
-              <FoodDetail food = {food} handleSubmit= {handleSubmit}></FoodDetail>
+              <AiOutlineArrowLeft
+                style={{ cursor: "pointer" }}
+                onClick={() => setShowDetails(false)}
+              />
+              <FoodDetail food={food} handleSubmit={handleSubmit}></FoodDetail>
             </div>
-
           )
         ) : (
           <FormS
             onSubmit={(e) => {
               handleSubmit(e, mealInfo);
             }}
-          > 
-          <AiOutlineArrowLeft onClick={() => setShowForm(false)}/>
+          >
+            <AiOutlineArrowLeft onClick={() => setShowForm(false)} />
             Calories{" "}
             <input
               type="text"
@@ -89,8 +99,6 @@ function TrackingForm({ handleSubmit, show, setShow }) {
   );
 }
 
-
-
 const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -129,9 +137,9 @@ const FormS = styled.form`
     color: white;
     cursor: pointer;
   }
-  svg{
+  svg {
     margin: 3px;
-    cursor:pointer;
+    cursor: pointer;
   }
 `;
 export default TrackingForm;

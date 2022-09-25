@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Doughnut } from "react-chartjs-2";
 import styled from "styled-components";
 import { DoughnutChart } from "./Chart";
 function FoodDetail({ food, handleSubmit }) {
@@ -17,7 +16,6 @@ function FoodDetail({ food, handleSubmit }) {
   console.log(nutrients);
   return (
     <Detail>
-    
       <ul>
         <li>
           <p>Food</p>
@@ -31,12 +29,11 @@ function FoodDetail({ food, handleSubmit }) {
             }}
           />
         </li>
-        <li>          
-            {/* <Calories>
-            {food.calories * quantity}g <span>cal</span>
-          </Calories> */}
-          
-          <DoughnutChart calories = {food.calories * quantity} nutrients={nutrients}/>
+        <li>
+          <DoughnutChart
+            calories={food.calories * quantity}
+            nutrients={nutrients}
+          />
 
           <Legend>
             <p>
@@ -71,7 +68,6 @@ function FoodDetail({ food, handleSubmit }) {
 
 export default FoodDetail;
 
-    
 const Detail = styled.div`
   ul {
     margin: 0;
@@ -110,5 +106,4 @@ const Legend = styled.div`
     padding: 0;
     font-size: 10px;
   }
-
 `;

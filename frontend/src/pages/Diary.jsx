@@ -1,16 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import MealTable from "../components/MealTable";
 import styled from "styled-components";
 import RecapTable from "../components/RecapTable";
 import { useStateContext } from "../utils/context";
-import { getFoods } from "../utils/apiCalls";
+
 function Diary() {
-  let params = useParams();
-
-
-
-
   const { meals } = useStateContext();
 
   return (
@@ -18,7 +13,7 @@ function Diary() {
       <Header>Diary Page</Header>
       <RecapTable />
       {Object.entries(meals).map(([key, value]) => {
-        return <MealTable name={key} meals = {value}/>;
+        return <MealTable name={key} meals={value} />;
       })}
     </>
   );
