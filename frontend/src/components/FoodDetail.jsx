@@ -8,12 +8,23 @@ function FoodDetail({ food, handleSubmit }) {
   };
   const [quantity, setQuantity] = useState(1);
   const handleChange = (e) => {
-    const value = parseInt(e.target.value) || 1;
+    const value = parseFloat(e.target.value) || 1;
     setQuantity(value);
   };
-  console.log(food);
+
+  const handleClick = (e, food) => {
+    console.log(food);
+    handleSubmit(e, {
+      ...food,
+      calories: food.calories * quantity,
+      carbs: food.carbs * quantity,
+      fat: food.fat * quantity,
+      protein: food.protein * quantity,
+    });
+  };
+
   const nutrients = [food.carbs, food.protein, food.fat];
-  console.log(nutrients);
+
   return (
     <Detail>
       <ul>
@@ -30,10 +41,13 @@ function FoodDetail({ food, handleSubmit }) {
           />
         </li>
         <li>
-          <DoughnutChart
-            calories={food.calories * quantity}
-            nutrients={nutrients}
-          />
+          <div style={{ width: "15%", padding: "10px" }}>
+            <DoughnutChart
+              calories={food.calories * quantity}
+              data={nutrients}
+              colors={["green", "orange", "purple"]}
+            />
+          </div>
 
           <Legend>
             <p>
@@ -52,7 +66,6 @@ function FoodDetail({ food, handleSubmit }) {
             </p>
             <p>
               <span style={{ color: "purple" }}>
-                {" "}
                 {computePercentage(nutrients, food.fat)}%{" "}
               </span>
               {(food.fat * quantity).toFixed(2)}g <span>fat</span>
@@ -61,7 +74,7 @@ function FoodDetail({ food, handleSubmit }) {
         </li>
       </ul>
 
-      <button onClick={(e) => handleSubmit(e, food)}>Add food</button>
+      <button onClick={(e) => handleClick(e, food)}>Add food</button>
     </Detail>
   );
 }

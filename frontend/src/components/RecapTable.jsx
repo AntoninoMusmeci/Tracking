@@ -2,7 +2,7 @@ import React from "react";
 import { useStateContext } from "../utils/context";
 import styled from "styled-components";
 function RecapTable() {
-  const { totalCalories } = useStateContext();
+  const { goals, nutrients } = useStateContext();
 
   return (
     <Wrapper>
@@ -10,21 +10,21 @@ function RecapTable() {
         <h1>Calories consumed</h1>
         <CalorieWrapper>
           <div>
-            <h1> 1500</h1>
+            <h1> {goals.calories}</h1>
             <h3>Goal </h3>
           </div>
           <div>
             <h1> - </h1>
           </div>
           <div>
-            <h1>{totalCalories}</h1>
+            <h1>{nutrients.calories}</h1>
             <h3>Food </h3>
           </div>
           <div>
             <h1> = </h1>
           </div>
           <div>
-            <h1>{1500 - totalCalories}</h1>
+            <h1>{goals.calories - nutrients.calories}</h1>
             <h3>Remaining </h3>
           </div>
         </CalorieWrapper>

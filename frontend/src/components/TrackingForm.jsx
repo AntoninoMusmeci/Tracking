@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import SearchModal from "./SearchModal";
 import FoodDetail from "./FoodDetail";
+
 import { AiOutlineArrowLeft } from "react-icons/ai";
 function TrackingForm({ handleSubmit, show, setShow }) {
-  const [mealInfo, setMealInfo] = useState({ name: "Manual Add" });
+  const [mealInfo, setMealInfo] = useState({});
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [food, setFood] = useState({});
@@ -59,6 +60,14 @@ function TrackingForm({ handleSubmit, show, setShow }) {
             }}
           >
             <AiOutlineArrowLeft onClick={() => setShowForm(false)} />
+            Name{" "}
+            <input
+              type="text"
+              id="name"
+              name="name"
+              onChange={handleInput}
+              placeholder="Enter Food Name"
+            />
             Calories{" "}
             <input
               type="text"
@@ -67,7 +76,7 @@ function TrackingForm({ handleSubmit, show, setShow }) {
               onChange={handleInput}
               placeholder="Enter calorie amount"
             />
-            Fat{" "}
+            Fat
             <input
               type="text"
               id="fat"
@@ -75,7 +84,7 @@ function TrackingForm({ handleSubmit, show, setShow }) {
               onChange={handleInput}
               placeholder="Enter fat amount"
             />
-            Protein{" "}
+            Protein
             <input
               type="text"
               id="protein"
@@ -83,7 +92,7 @@ function TrackingForm({ handleSubmit, show, setShow }) {
               onChange={handleInput}
               placeholder="Enter protein amount"
             />
-            Carbohydrates{" "}
+            Carbohydrates
             <input
               type="text"
               id="carbohydrates"

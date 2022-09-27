@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { getFoods } from "../utils/apiCalls";
 import styled from "styled-components";
 import { BsPlusCircle, BsSearch } from "react-icons/bs";
@@ -10,9 +10,6 @@ function SearchModal({ addFood, setShowDetails, setFood }) {
   const { foods, setFoods } = useStateContext();
   const [ing, setIng] = useState("");
 
-  useEffect(() => {
-    console.log("data", foods);
-  }, [foods]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

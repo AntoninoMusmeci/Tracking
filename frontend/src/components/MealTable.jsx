@@ -2,19 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import TrackingForm from "./TrackingForm";
 import { v4 as uuid } from "uuid";
-import { useStateContext } from "../utils/context";
-
-function MealTable({ name, meals }) {
+import Button from "./Button";
+function MealTable({ name, meals, addMeal, removeMeal, date }) {
   const [show, setShow] = useState(false);
-  const { setTotalCalories, addMeal, removeMeal } = useStateContext();
 
   const handleSubmit = (e, info) => {
     e.preventDefault();
-    setTotalCalories((state) => state + parseInt(info.calories));
-
-    addMeal(name, { ...info, id: uuid() });
+    addMeal(name, { ...info, id: uuid(), date: date });
   };
-
   return (
     <>
       <Wrapper>
@@ -34,15 +29,7 @@ function MealTable({ name, meals }) {
           setShow={setShow}
           handleSubmit={handleSubmit}
         />
-        <ButtonStyled>
-          <button
-            onClick={() => {
-              setShow(true);
-            }}
-          >
-            +
-          </button>
-        </ButtonStyled>
+        <Button text={"+"} handleClick={() => setShow(true)} />
       </Wrapper>
     </>
   );
@@ -60,26 +47,6 @@ const Wrapper = styled.div`
   box-shadow: 0px 13px 15px -3px grey;
   margin: 3rem;
   background: white;
-`;
-
-const ButtonStyled = styled.div`
-  justify-content: center;
-  display: flex;
-  padding: 1px;
-
-  button {
-    margin-top: 1rem;
-    border-radius: 1.5rem;
-    margin-bottom: 1rem;
-    background: var(--secondary);
-    font-weight: 1500;
-    font-size: 2rem;
-    padding: 0.5rem 1rem;
-    width: 50%;
-
-    cursor: pointer;
-    color: white;
-  }
 `;
 
 const MealWrapper = styled.ul`

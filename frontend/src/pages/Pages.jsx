@@ -5,6 +5,7 @@ import HomePage from "./HomePage";
 import NavBar from "../components/NavBar";
 import Dashboard from "./Dashboard";
 import Recipes from "./Recipes";
+import Ingredients from "./Ingredients";
 function Pages() {
   return (
     <>
@@ -14,6 +15,7 @@ function Pages() {
         <Route path="/diary" element={<Diary />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/recipes" element={<Recipes />} />
+        <Route path="/recipes/ingredients" element={<Ingredients />} />
       </Routes>
     </>
   );

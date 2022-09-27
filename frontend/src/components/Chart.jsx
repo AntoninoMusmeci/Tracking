@@ -4,23 +4,20 @@ import { Doughnut } from "react-chartjs-2";
 import styled from "styled-components";
 ChartJS.register(ArcElement);
 
-export function DoughnutChart({ nutrients, calories }) {
-  const data = {
-    labels: ["Red", "Blue", "Yellow"],
+export function DoughnutChart({ data, colors, calories }) {
+  const formatted_data = {
     datasets: [
       {
-        data: nutrients,
-        backgroundColor: ["green", "orange", "purple"],
-        borderColor: ["green", "orange", "purple"],
-        borderWidth: 1,
-        legend: { display: false },
-        Tooltip: { display: false },
+        data: data,
+        backgroundColor: colors,
+        borderWidth: 0,
+
       },
     ],
   };
   return (
     <ChartStyle>
-      <Doughnut options={{ cutout: 27 }} data={data} />
+      <Doughnut  options={{ cutout: "90%" }} data={formatted_data} />
       <div>
         {calories}
         <span>cal</span>
@@ -31,8 +28,14 @@ export function DoughnutChart({ nutrients, calories }) {
 
 const ChartStyle = styled.div`
   position: relative;
-  width: 15%;
-  padding: 10px;
+  width: 100%;
+  canvas{
+    position: absolute;
+    width: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+  }
   div {
     display: flex;
     flex-direction: column;

@@ -1,14 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import {getFormattedDate} from "../utils/functions"
 function NavBar() {
-  function getFormattedDate(date) {
-    let year = date.getFullYear();
-    let month = (1 + date.getMonth()).toString().padStart(2, "0");
-    let day = date.getDate().toString().padStart(2, "0");
-
-    return month + "/" + day + "/" + year;
-  }
+  
   let date = getFormattedDate(new Date());
 
   return (
