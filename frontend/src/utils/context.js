@@ -2,52 +2,42 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { getFormattedDate } from "./functions";
 const AppContext = createContext();
 export const StateContext = ({ children }) => {
+  function getLocalStorage(key, initialValue) {
+    try {
+      const value = window.localStorage.getItem(key);
+      return value ? JSON.parse(value) : initialValue;
+    } catch (e) {
+      // if error, return initial value
+      return initialValue;
+    }
+  }
+
+  function setLocalStorage(key, value) {
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch (e) {
+      // catch possible errors:
+      // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+      console.log(e);
+    }
+  }
+
   const [foods, setFoods] = useState([]);
-  const [totalCalories, setTotalCalories] = useState(0);
-  const [recipes, setRecipes] = useState([]);
-  const [ingredients, setIngredients] = useState({
-    ingredients: [
-      {
-        name: "Pizza",
-        calories: "200",
-        fat: "50",
-        protein: "14",
-        carbohydrates: "60",
-        id: "34f72ee5-afb1-4768-9f46-6098654329a0",
-      },
-      {
-        name: "Scrambled Eggs",
-        id: "01041355-05ce-4639-9588-6d188749634c",
-        fat: 16.18,
-        protein: 13.84,
-        carbs: 2.08,
-        calories: 212,
-      },
-      {
-        name: "Boiled Egg",
-        id: "3fe0932a-4faa-4cd8-a029-ad7cc5f11fda",
-        fat: 10.61,
-        protein: 12.58,
-        carbs: 1.12,
-        calories: 155,
-      },
-      {
-        name: "Eggs",
-        id: "652488ba-9722-4abb-a546-50641c8b54d2",
-        fat: 0,
-        protein: 10.1442068105529,
-        carbs: 1.69070113509215,
-        calories: 50,
-      },
-    ],
-  });
+  const [recipes, setRecipes] = useState(() => getLocalStorage("recipes", []));
+  const [ingredients, setIngredients] = useState(() =>
+    getLocalStorage("ingredients", {
+      ingredients: [],
+    })
+  );
   const [weekNutrients, setWeekNutrients] = useState([]);
-  const [meals, setMeals] = useState({
-    breakfast: [],
-    lunch: [],
-    dinner: [],
-    snacks: [],
-  });
+  const [meals, setMeals] = useState(() =>
+    getLocalStorage("meals", {
+      breakfast: [],
+      lunch: [],
+      dinner: [],
+      snacks: [],
+    })
+  );
 
   const [nutrients, setNutrients] = useState({
     calories: 0,
@@ -56,12 +46,30 @@ export const StateContext = ({ children }) => {
     carbs: 0,
   });
 
-  const [goals, setGoals] = useState({
-    calories: 1500,
-    fat: 50,
-    protein: 50,
-    carbs: 130,
-  });
+  const [goals, setGoals] = useState(() =>
+    getLocalStorage("goals", {
+      calories: 1500,
+      fat: 50,
+      protein: 50,
+      carbs: 130,
+    })
+  );
+
+  useEffect(() => {
+    setLocalStorage("meals", meals);
+  }, [meals]);
+
+  useEffect(() => {
+    setLocalStorage("goals", goals);
+  }, [goals]);
+
+  useEffect(() => {
+    setLocalStorage("ingredients", ingredients);
+  }, [ingredients]);
+
+  useEffect(() => {
+    setLocalStorage("recipes", recipes);
+  }, [recipes]);
 
   const addIngredient = (key, ing) => {
     key = key.toLowerCase();
@@ -141,8 +149,6 @@ export const StateContext = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        totalCalories,
-        setTotalCalories,
         meals,
         addMeal,
         removeMeal,
@@ -159,7 +165,7 @@ export const StateContext = ({ children }) => {
         recipes,
         setRecipes,
         removeRecipe,
-        setGoals
+        setGoals,
       }}
     >
       {children}

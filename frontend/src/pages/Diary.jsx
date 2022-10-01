@@ -13,7 +13,7 @@ function Diary() {
     meals,
     addMeal,
     removeMeal,
-    setTotalCalories,
+
     setNutrients,
   } = useStateContext();
   const useQuery = () => new URLSearchParams(useLocation().search);
@@ -26,15 +26,13 @@ function Diary() {
   useEffect(() => {
     const nutrients = { calories: 0, fat: 0, protein: 0, carbs: 0 };
     for (let [key, value] of Object.entries(meals)) {
-      for(let v of value){
-        console.log(value)
-        if (v.date === getFormattedDate(date))
-          nutrients.calories += v.calories;
+      for (let v of value) {
+        console.log(value);
+        if (v.date === getFormattedDate(date)) nutrients.calories += v.calories;
       }
-  
     }
-    console.log("useEffect", nutrients)
-    setNutrients(nutrients)
+    console.log("useEffect", nutrients);
+    setNutrients(nutrients);
   }, [date, meals, setNutrients]);
 
   const changeDate = (days) => {
@@ -64,7 +62,6 @@ function Diary() {
             totCalories += item.calories;
           return item.date === getFormattedDate(date);
         });
-        setTotalCalories(totCalories);
 
         return (
           <MealTable
