@@ -29,7 +29,7 @@ function MealTable({ name, meals, addMeal, removeMeal, date }) {
           setShow={setShow}
           handleSubmit={handleSubmit}
         />
-        <Button text={"+"} handleClick={() => setShow(true)} />
+        <Button  handleClick={() => setShow(true)} > + </Button>
       </Wrapper>
     </>
   );

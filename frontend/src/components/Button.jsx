@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components';
 
-function Button({text, handleClick}) {
+function Button({ children,handleClick}) {
   return (
 
     <ButtonStyled>
     <button
       onClick={handleClick}
     >
-      {text}
+      {children}
     </button>
   </ButtonStyled>
  
