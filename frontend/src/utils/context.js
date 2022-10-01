@@ -159,6 +159,7 @@ export const StateContext = ({ children }) => {
         recipes,
         setRecipes,
         removeRecipe,
+        setGoals
       }}
     >
       {children}

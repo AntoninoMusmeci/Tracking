@@ -3,6 +3,7 @@ import { useStateContext } from "../utils/context";
 import styled from "styled-components";
 import WeekChart from "../components/WeekChart";
 import { useEffect, useState } from "react";
+  
 
 function Dashboard() {
   const getDaysArray = function (start, end) {
@@ -46,10 +47,10 @@ function Dashboard() {
 
           <DivC>
             <DoughnutChart
-              calories={1500}
+              calories={goals.calories}
               data={[
                 weekNutrients[day]?.calories,
-                weekNutrients[day]?.calories - goals["calories"],
+                weekNutrients[day]?.calories - goals.calories,
               ]}
               colors={["blue", "grey"]}
             ></DoughnutChart>
@@ -60,19 +61,19 @@ function Dashboard() {
           <h2> Nutrients </h2>
           <Nutrients>
             <DoughnutChart
-              calories={goals["fat"]}
-              data={[weekNutrients[day]?.fat,weekNutrients[day]?.fat - goals["fat"]]}
+              calories={goals.fat}
+              data={[weekNutrients[day]?.fat,weekNutrients[day]?.fat - goals.fat]}
               colors={["purple", "grey"]}
             ></DoughnutChart>
 
             <DoughnutChart
-              calories={goals["fat"]}
-              data={[weekNutrients[day]?.protein, weekNutrients[day]?.protein - goals["fat"]]}
+              calories={goals.protein}
+              data={[weekNutrients[day]?.protein, weekNutrients[day]?.protein - goals.protein]}
               colors={["orange", "grey"]}
             ></DoughnutChart>
             <DoughnutChart
-              calories={goals["fat"]}
-              data={[weekNutrients[day]?.carbs, weekNutrients[day]?.carbs - goals["fat"]]}
+              calories={goals.carbs}
+              data={[weekNutrients[day]?.carbs, weekNutrients[day]?.carbs - goals.carbs]}
               colors={["green", "grey"]}
             ></DoughnutChart>
           </Nutrients>

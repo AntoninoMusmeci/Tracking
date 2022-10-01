@@ -8,6 +8,7 @@ import Recipes from "./Recipes";
 import Ingredients from "./Ingredients";
 import NewRecipe from "./NewRecipe";
 import User from "./User";
+import EditGoals from "./EditGoals";
 function Pages() {
   return (
     <>
@@ -20,6 +21,7 @@ function Pages() {
         <Route path="/recipes/ingredients" element={<Ingredients />} />
         <Route path="/recipes/create-recipe" element={<NewRecipe />} />
         <Route path="/user" element={<User />} />
+        <Route path="/user/edit-goals" element={<EditGoals />} />
       </Routes>
     </>
   );
